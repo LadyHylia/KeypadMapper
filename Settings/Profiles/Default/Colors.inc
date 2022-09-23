@@ -1,5 +1,6 @@
 [Variables]
 @Include = Settings.inc
+ 
 01ColorScheme=#BaseColor#
 02ColorScheme=0,122,134
 03ColorScheme=#BaseColor#
@@ -11,7 +12,7 @@
 09ColorScheme=#BaseColor#
 10ColorScheme=#BaseColor#
 11ColorScheme=#BaseColor#
-12ColorScheme=#BaseColor#
+12ColorScheme=149,0,26
 13ColorScheme=#BaseColor#
 14ColorScheme=#BaseColor#
 15ColorScheme=#BaseColor#
@@ -37,7 +38,7 @@ ThumbDownLeftColorScheme=#BaseColor#
 ThumbDownRightColorScheme=#BaseColor#
 
 ButtonColorScheme=#BaseColor#
-
+Group=Colors
 [Images]
 01ImagePath=C:\Users\Lady Hylia\Pictures\Fb0z7N7XEAM_rN_.jpg
 
