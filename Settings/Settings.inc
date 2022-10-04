@@ -1,8 +1,9 @@
 [Variables]
 @Include=#CURRENTPATH#\Profiles\#CurrentProfile#\Colors.inc
-
+Num=0
+NumOfKeys=BLANK
 [ResetALLColors]
-Measure = Calc
+
 Command1=[!WriteKeyValue Variables 01ColorScheme [&MeasureScript:GetColor('cur_rgb')] "#CURRENTPATH#\Profiles\#CurrentProfile#\Colors.inc"]
 Command2=[!WriteKeyValue Variables 02ColorScheme [&MeasureScript:GetColor('cur_rgb')] "#CURRENTPATH#\Profiles\#CurrentProfile#\Colors.inc"]
 Command3=[!WriteKeyValue Variables 03ColorScheme [&MeasureScript:GetColor('cur_rgb')] "#CURRENTPATH#\Profiles\#CurrentProfile#\Colors.inc"]
@@ -69,7 +70,9 @@ Command=62[!WriteKeyValue Variables 62ColorScheme [&MeasureScript:GetColor('cur_
 
 
 
-
-
-[!Refresh "TartarusMap"]
-[!DeactivateConfig]
+[MeasureSetVariables]
+Measure=Plugin
+Plugin=ActionTimer
+ActionList1=Repeat SetAction,50,#NumOfVars#
+SetAction=[!SetVariable Color#Num# "#BaseColor#"][!SetVariable Num "(#Num#+1)"][!UpdateMeasure "MeasureSetVariables"]
+DynamicVariables=1

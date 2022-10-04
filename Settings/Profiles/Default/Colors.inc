@@ -15,7 +15,7 @@
 12ColorScheme=149,0,26
 13ColorScheme=#BaseColor#
 14ColorScheme=#BaseColor#
-15ColorScheme=#BaseColor#
+15ColorScheme=142,156,255
 16ColorScheme=#BaseColor#
 17ColorScheme=#BaseColor#
 18ColorScheme=#BaseColor#
