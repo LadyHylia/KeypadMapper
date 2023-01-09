@@ -38,8 +38,5 @@ ThumbDownLeftColorScheme=#BaseColor#
 ThumbDownRightColorScheme=#BaseColor#
 
 ButtonColorScheme=#BaseColor#
-Group=Colors
-[Images]
-01ImagePath=C:\Users\Lady Hylia\Pictures\Fb0z7N7XEAM_rN_.jpg
 
 

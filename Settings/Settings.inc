@@ -70,9 +70,3 @@ Command=62[!WriteKeyValue Variables 62ColorScheme [&MeasureScript:GetColor('cur_
 
 
 
-[MeasureSetVariables]
-Measure=Plugin
-Plugin=ActionTimer
-ActionList1=Repeat SetAction,50,#NumOfVars#
-SetAction=[!SetVariable Color#Num# "#BaseColor#"][!SetVariable Num "(#Num#+1)"][!UpdateMeasure "MeasureSetVariables"]
-DynamicVariables=1
