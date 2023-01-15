@@ -1,6 +1,6 @@
 [Variables]
 @Include = Settings.inc
- 
+BaseColor = 24,255,37
 01ColorScheme=#BaseColor#
 02ColorScheme=0,122,134
 03ColorScheme=#BaseColor#
@@ -38,5 +38,7 @@ ThumbDownLeftColorScheme=#BaseColor#
 ThumbDownRightColorScheme=#BaseColor#
 
 ButtonColorScheme=#BaseColor#
+Group=Colors
+
 
 
