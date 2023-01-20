@@ -1,6 +1,8 @@
 [Variables]
+DynamicVariables=1
 @Include=#CURRENTPATH#\Profiles\#CurrentProfile#\Colors.inc
 Num=0
 NumOfKeys=BLANK
-CurrentKey=07
-CurrentProfile=BLANK
+CurrentKey=01
+CurrentProfile=Default
+EditMode=0
