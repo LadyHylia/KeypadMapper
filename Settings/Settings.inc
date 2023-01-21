@@ -6,3 +6,4 @@ NumOfKeys=BLANK
 CurrentKey=01
 CurrentProfile=Default
 EditMode=0
+FaveEditMode=1
