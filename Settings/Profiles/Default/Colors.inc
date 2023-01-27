@@ -1,5 +1,4 @@
 [Variables]
-@Include = Settings.inc
 BaseColor = 24,255,37
 01ColorScheme=#BaseColor#
 01Font=#BaseColor#
