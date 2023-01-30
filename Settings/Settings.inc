@@ -2,7 +2,7 @@
 DynamicVariables=1
 Num=0
 NumOfKeys=BLANK
-CurrentKey=01
+CurrentKey=07
 CurrentProfile=Default
 EditMode=0
 FaveEditMode=0
