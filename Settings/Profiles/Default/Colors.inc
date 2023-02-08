@@ -4,6 +4,8 @@
 
 
 BaseColor =102,185,51
+StartColorScheme=#BaseColor#
+StartFont=#BaseColor#
 01ColorScheme=#BaseColor#
 01Font=#BaseColor#
 02ColorScheme=#BaseColor#
