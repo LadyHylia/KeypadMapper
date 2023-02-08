@@ -2,9 +2,9 @@
 DynamicVariables=1
 Num=0
 NumOfKeys=BLANK
-CurrentKey=#CURRENTSECTION#
+CurrentKey=MeasureEditModeValue
 CurrentProfile=Default
-EditMode=0
+EditMode=1
 FaveEditMode=0
 
 MeterFave01color=255,255,255
@@ -24,7 +24,7 @@ MeterFave14color=255,255,255
 
 ConfirmColor=69,174,0
 CancelColor=149,0,26
-CurrentColor=102,185,51
+CurrentColor=23,0,244
 [MeterFave01Color]=149,0,26
 [MeterFave01:Color]=149,0,26
 
