@@ -2,7 +2,7 @@
 DynamicVariables=1
 Num=0
 NumOfKeys=BLANK
-CurrentKey=07
+CurrentKey=#CURRENTSECTION#
 CurrentProfile=Default
 EditMode=0
 FaveEditMode=0
@@ -24,6 +24,7 @@ MeterFave14color=255,255,255
 
 ConfirmColor=69,174,0
 CancelColor=149,0,26
+CurrentColor=102,185,51
 [MeterFave01Color]=149,0,26
 [MeterFave01:Color]=149,0,26
 

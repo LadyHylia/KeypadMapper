@@ -1,0 +1,2 @@
+[Variables]
+01ImagePath=

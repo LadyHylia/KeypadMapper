@@ -1,2 +1,0 @@
-[Variables]
-DynamicVariables=1
