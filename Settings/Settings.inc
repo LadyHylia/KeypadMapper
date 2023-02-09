@@ -4,7 +4,7 @@ Num=0
 NumOfKeys=BLANK
 CurrentKey=MeasureEditModeValue
 CurrentProfile=Default
-EditMode=1
+EditMode=0
 FaveEditMode=0
 
 MeterFave01color=255,255,255

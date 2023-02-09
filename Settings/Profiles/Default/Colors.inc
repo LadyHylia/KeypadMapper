@@ -34,7 +34,7 @@ StartFont=#BaseColor#
 13Font=#BaseColor#
 14ColorScheme=#BaseColor#
 14Font=#BaseColor#
-15ColorScheme=[102,185,51]
+15ColorScheme=#BaseColor#
 15Font=#BaseColor#
 16ColorScheme=102,185,51
 16Font=#BaseColor#
@@ -44,7 +44,7 @@ StartFont=#BaseColor#
 18Font=#BaseColor#
 19ColorScheme=#BaseColor#
 19Font=#BaseColor#
-20ColorScheme=102,185,51
+20ColorScheme=#BaseColor#
 20Font=#BaseColor#
 
 ScrollWheelColorScheme=#BaseColor#
