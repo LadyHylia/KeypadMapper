@@ -1,23 +1,3 @@
-   [TextStyle1]
-;		Meter=String
-		FontSize                = (#FontSizeKey#*((#Width#)/500))
-		ColorScheme				= [#CURRENTSECTION#:FontColor]
-        FontFace                =Montserrat
-        StringAlign             = centercenter
-        clipString              = 2
-        H                       =#ButtonSize#
-        W                       =#ButtonSize#
-		Scale					=2
-        FontColor               =#TextColor#
-		Text					=[#CURRENTSECTION#:Text]
-        AntiAlias               =1
-        DynamicVariables        =1
-        Group                   = MeterKeys
-		LeftMouseUpAction=[!SetVariable "INPUT-Var" #CurrentSection# ][!CommandMeasure "MeasureInput" "ExecuteBatch ALL"]
-		RightMouseUpAction=#FunctionRightAction#[!Refresh]
-		MiddleMouseUpAction=#FunctionMiddleAction[!Refresh]
-
-		
     [TextStyle2]
 		FontSize                = (#FontSizeKey#*((#Width#)/500))
 ;		ColorScheme				= 7,234,250,255
@@ -51,35 +31,28 @@
 ;	RightMouseUpAction=[]
 ;	MiddleMouseUpAction=[]
 	[MeasureEditModeValue]
-Measure=Calc
+	Measure=Calc
 Formula=#EditMode#
 IfCondition=(#CurrentSection#=1)
 
-IfTrueAction=[!SetOptionGroup MeterKeys LeftMouseUpAction [#SetKeyColor#]]
+IfTrueAction=[!SetOptionGroup MeterKeys LeftMouseUpAction """[!WriteKeyValue Variables #*CurrentSection*#ColorScheme "#CurrentColor#" "#CURRENTPATH#\Settings\Profiles\#CurrentProfile#\Colors.inc"][!Refresh]"""]     [!SetOptionGroup MeterKeys RightMouseUpAction """[!WriteKeyValue Variables #*CurrentSection*#ColorScheme #**BaseColor**# "#CURRENTPATH#\Settings\Profiles\#CurrentProfile#\Colors.inc"][!Refresh]"""]     [!SetOptionGroup MeterKeys MiddleMouseUpAction """[!WriteKeyValue Variables #*CurrentSection*#Font #CurrentColor# "#CurrentPath\Settings\Profiles\#CurrentProfile#\Colors.inc"][!Refresh]"""]     [!SetOptionGroup MeterKeys MiddleMouseDoubleClick """[!WriteKeyValue Variables #*CurrentSection*#Font #**BaseColorFont***# "#CurrentPath\Settings\Profiles\#CurrentProfile#\Colors.inc"][!Refresh]"""]    [!SetOptionGroup MeterKeys LeftMouseDoubleClickAction """[!WriteKeyValue Variables #*CurrentSection*#Fill 0,0,0,1 "#CurrentPath#Settings\Profiles\#CurrentProfile#\Colors.inc"][!Refresh]"""]     [!SetOptionGroup MeterKeys RightMouseDoubleClickAction """[!WriteKeyValue Variables #*CurrentSection*#Fill #*CurrentSection*#ColorScheme"#CurrentPath#Settings\profiles\#CurrentProfile#\Colors.inc"][!Refresh]"""]
 
 
-;[!SetVariable FunctionRightAction #SetKeyColorToDefault#][!SetVariable FunctionMiddleActionAction #SetFontColor#]
 
 
-;[!DisableMouseActionGroup ButtonGroup "LeftMouseDownAction|RightMouseDownAction|MiddleMouseDownAction"] [!EnableMouseAction TextStyle1 "LeftMouseUpAction|RightMouseUpAction|MiddleMouseUpAction"][!UpdateMeter "TextStyle1"][!UpdateGroup "ButtonGroup][!UpdateMeasure #CurrentSection#]
 
 
-IfFalseAction=[!WriteKeyValue TextStyle1 LeftMouseUpAction """[!WriteKeyValue Variables CurrentKey "#*CURRENTSECTION*#" "#CURRENTPATH#\Settings\Settings.inc"][!SetVariable "INPUT-Var" "#*CURRENTSECTION*#" ][!CommandMeasure "MeasureInput" "ExecuteBatch ALL"]"""]
+IfFalseAction=[!SetOptionGroup MeterKeys LeftMouseUpAction """[!SetVariable "INPUT-Var" #*CurrentSection*# ][!CommandMeasure "MeasureInput" "ExecuteBatch ALL"]"""][!SetOptionGroup MeterKeys RightMouseUpAction ""][!SetOptionGroup MeterKeys MiddleMouseUpAction ""]
 
 
-;[!EnableMouseActionGroup ButtonGroup "LeftMouseDownAction | RightMouseDownAction | MiddleMouseDownAction"] [!DisableMouseAction TextStyle1 "LeftMouseUpAction | RightMouseUpAction | MiddleMouseUpAction"][!UpdateMeter "TextStyle1"][!UpdateGroup "ButtonGroup][!UpdateMeasure #CurrentSection#]
+
 
 
 
 DynamicVariables=1
 
-		Meter				= Shape
-		Shape				= Ellipse ([Button:X] + #Gap# * 2), ([Button:Y] + #Gap# * 2), #Gap# * 2 | Fill Color 0,0,0,1 | StrokeWidth 1 | StrokeColor #ButtonColorScheme#
-
-   
-
-;========== Function Measures ==========
-    [DynamicFontSizePlus]
+	
+	    [DynamicFontSizePlus]
         Measure         =Calc
         Paused          =1
         OnUpdateAction  =[Play "#@#Sounds\Scroll.wav"][!WriteKeyValue Variables FontSizeKey "((#FontSizeKey#)+1)"][!SetVariable FontSizeKey "((#FontSizeKey#)+1)"]
@@ -135,8 +108,7 @@ DynamicVariables=1
 UpdateDivider=-1
 
 	[FileBrowser]
-	
-	Measure=Plugin
+Measure=Plugin
 Plugin=FileChoose
 UseNewStyle=0
 GetTarget=1
@@ -154,3 +126,74 @@ ImageInitialDirectory=
 Command1=[!WriteKeyValue Variables #CurrentKey#ImagePath "$Path$" "#CURRENTPATH#\Settings\Profiles\#CurrentProfile#\Images.inc"][!Update]
 Command2=[!Refresh]
 
+[MeasureNewProfileInput]
+        Measure    =Plugin
+        Plugin     =InputText
+		DefaultValue=NewProfile
+        SolidColor =002366FF
+        FontColor  =255,255,255,255
+        FontFace   =Montserrat
+        FontSize   =18
+        X          =((#Width#/2)-240/2)
+        Y          =(-30)
+        H          =40
+        W          =240 
+		Command1	=[!WriteKeyValue Variables CurrentProfile "$UserInput$" "#CURRENTPATH#\Settings\Settings.inc"]
+		Command2	=[!CommandMeasure "MeasureNewProfile" "Run"]
+		
+[MeasureNewProfile]
+Measure=Plugin
+Plugin=RunCommand
+Parameter=Xcopy "#CurrentPath#@Resources\DefaultProfile" "#CurrentPath#Settings\Profiles\#CurrentProfile#" /E
+FinishAction=[!Refresh]
+
+;Partway through writing the parameters for command line rename of copied folder
+;Need to create functionality for the text entry before continuing
+
+[MeasureProfileList]
+
+Measure=Plugin
+Plugin=SysInfo
+SysInfoType=DirInfo
+SysInfoPath=#ROOTCONFIGPATH#Settings\Profiles
+SysInfoFilter=*.*
+
+[EditingContextMenu]
+Meter=ContextMenu
+MenuItem1Text="Edit Colors"
+MenuItem1Action=[!ActivateConfig "KeypadMapper\Settings" "ColorPickerPlus.ini"][!Redraw]
+MenuItem2Text="Edit Label Image"
+MenuItem2Action=[!CommandMeasure FileBrowser "ChooseImage 2"]
+MenuItem3Text="Edit Key Binding"
+MenuItem3Action=
+MenuItem4Text="Create New Profile"
+MenuItem4Action=[!CommandMeasure MeasureNewProfileInput "ExecuteBatch ALL"]
+MenuItem5Text="Change Profile"
+MenuItem5Action=
+MenuItem6Text="Edit Profile 'Quick Change' Bindings"
+MenuItem6Action=
+MenuItem7Text="Open Settings"
+MenuItem7Action=
+
+
+
+
+
+
+[SubMenu1]
+Meter=ContextMenu
+MenuItem1Text=Sub-item 1
+MenuItem1Action=!Execute ["[RainmeterLog] Sub-item 1 selected"]
+MenuItem2Text=Sub-item 2
+MenuItem2Action=!Execute ["[RainmeterLog] Sub-item 2 selected"]
+
+In this example, the sub-menu contains two items, each with its own text and action.
+
+Associate each sub-menu meter with the corresponding main menu item by adding a SubMenu option to the main menu item meter, and setting its value to the name of the sub-menu meter. For example:
+
+css
+
+[MainMenuButton1]
+Meter=Button
+Text=Main item 1
+SubMenu=SubMenu1

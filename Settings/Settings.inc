@@ -25,6 +25,7 @@ MeterFave14color=255,255,255
 ConfirmColor=69,174,0
 CancelColor=149,0,26
 CurrentColor=255,255,255
+
 [MeterFave01Color]=149,0,26
 [MeterFave01:Color]=149,0,26
 
