@@ -77,9 +77,9 @@ DynamicVariables=1
         H           =35
         W           =480
         ; These following lines are the heart of the skins functionality
-        DefaultValue="[#[#INPUT-Var]]"
+        DefaultValue="[#[#INPUT-Var]Text]"
         Command1    =Play #@#Sounds\Input.wav
-        Command2    =[!WriteKeyValue Variables """#INPUT-Var#""" """$UserInput$""" "#CURRENTPATH#Settings\Profiles\#CurrentProfile#\Values.inc"]
+        Command2    =[!WriteKeyValue Variables """#INPUT-Var#Text""" """$UserInput$""" "#CURRENTPATH#Settings\Profiles\#CurrentProfile#\Values.inc"]
         Command3    =[!Refresh]
         
     ; Inputbox for changing the skin size and global font size
@@ -187,11 +187,7 @@ MenuItem1Action=!Execute ["[RainmeterLog] Sub-item 1 selected"]
 MenuItem2Text=Sub-item 2
 MenuItem2Action=!Execute ["[RainmeterLog] Sub-item 2 selected"]
 
-In this example, the sub-menu contains two items, each with its own text and action.
 
-Associate each sub-menu meter with the corresponding main menu item by adding a SubMenu option to the main menu item meter, and setting its value to the name of the sub-menu meter. For example:
-
-css
 
 [MainMenuButton1]
 Meter=Button
