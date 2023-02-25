@@ -153,10 +153,12 @@ FinishAction=[!Refresh]
 [MeasureProfileList]
 
 Measure=Plugin
-Plugin=SysInfo
-SysInfoType=DirInfo
-SysInfoPath=#ROOTCONFIGPATH#Settings\Profiles
-SysInfoFilter=*.*
+Plugin=FileView
+Path=#ROOTCONFIG#Settings\Profiles
+ShowDotDot=0
+ShowFile=0
+ShowFolder=1
+Count=15
 
 [EditingContextMenu]
 Meter=ContextMenu
@@ -169,7 +171,7 @@ MenuItem3Action=
 MenuItem4Text="Create New Profile"
 MenuItem4Action=[!CommandMeasure MeasureNewProfileInput "ExecuteBatch ALL"]
 MenuItem5Text="Change Profile"
-MenuItem5Action=
+MenuItem5Action=ChangeProfileSubMenu1
 MenuItem6Text="Edit Profile 'Quick Change' Bindings"
 MenuItem6Action=
 MenuItem7Text="Open Settings"
@@ -180,7 +182,7 @@ MenuItem7Action=
 
 
 
-[SubMenu1]
+[ChangeProfileSubMenu1]
 Meter=ContextMenu
 MenuItem1Text=Sub-item 1
 MenuItem1Action=!Execute ["[RainmeterLog] Sub-item 1 selected"]
