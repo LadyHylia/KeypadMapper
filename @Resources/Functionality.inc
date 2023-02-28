@@ -147,18 +147,9 @@ Plugin=RunCommand
 Parameter=Xcopy "#CurrentPath#@Resources\DefaultProfile" "#CurrentPath#Settings\Profiles\#CurrentProfile#" /E
 FinishAction=[!Refresh]
 
-;Partway through writing the parameters for command line rename of copied folder
-;Need to create functionality for the text entry before continuing
 
-[MeasureProfileList]
 
-Measure=Plugin
-Plugin=FileView
-Path=#ROOTCONFIG#Settings\Profiles
-ShowDotDot=0
-ShowFile=0
-ShowFolder=1
-Count=15
+
 
 [EditingContextMenu]
 Meter=ContextMenu
