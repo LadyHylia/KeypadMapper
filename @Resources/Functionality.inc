@@ -151,34 +151,12 @@ FinishAction=[!Refresh]
 
 
 
-[EditingContextMenu]
-Meter=ContextMenu
-MenuItem1Text="Edit Colors"
-MenuItem1Action=[!ActivateConfig "KeypadMapper\Settings" "ColorPickerPlus.ini"][!Redraw]
-MenuItem2Text="Edit Label Image"
-MenuItem2Action=[!CommandMeasure FileBrowser "ChooseImage 2"]
-MenuItem3Text="Edit Key Binding"
-MenuItem3Action=
-MenuItem4Text="Create New Profile"
-MenuItem4Action=[!CommandMeasure MeasureNewProfileInput "ExecuteBatch ALL"]
-MenuItem5Text="Change Profile"
-MenuItem5Action=ChangeProfileSubMenu1
-MenuItem6Text="Edit Profile 'Quick Change' Bindings"
-MenuItem6Action=
-MenuItem7Text="Open Settings"
-MenuItem7Action=
 
 
 
 
 
 
-[ChangeProfileSubMenu1]
-Meter=ContextMenu
-MenuItem1Text=Sub-item 1
-MenuItem1Action=!Execute ["[RainmeterLog] Sub-item 1 selected"]
-MenuItem2Text=Sub-item 2
-MenuItem2Action=!Execute ["[RainmeterLog] Sub-item 2 selected"]
 
 
 
@@ -186,3 +164,100 @@ MenuItem2Action=!Execute ["[RainmeterLog] Sub-item 2 selected"]
 Meter=Button
 Text=Main item 1
 SubMenu=SubMenu1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[MeasureProfileList]
+Measure=Plugin
+Plugin=FileView
+Path=#ROOTCONFIG#Settings\Profiles
+ShowDotDot=0
+ShowFile=0
+ShowFolder=1
+Count=15
+
+[Profile01Measure]
+Measure=Plugin
+Plugin=FileView
+Path=[MeasureProfileList]
+Type=FileName
+Index=1
+OnRefreshAction=[!WriteKeyValue Variables Profile01 "#CurrentSection#" "#ROOTCONFIG#Settings\Settings.inc"]
+
+
+[Profile02Measure]
+Measure=Plugin
+Plugin=FileView
+Path=[MeasureProfileList]
+Type=FileName
+Index=2
+
+[Profile03Measure]
+Measure=Plugin
+Plugin=FileView
+Path=[MeasureProfileList]
+Type=FileName
+Index=3
+
+[Profile04Measure]
+Measure=Plugin
+Plugin=FileView
+Path=[MeasureProfileList]
+Type=FileName
+Index=4
+
+[Profile05Measure]
+Measure=Plugin
+Plugin=FileView
+Path=[MeasureProfileList]
+Type=FileName
+Index=5
+
+[Profile06Measure]
+Measure=Plugin
+Plugin=FileView
+Path=[MeasureProfileList]
+Type=FileName
+Index=6
+
+[Profile07Measure]
+Measure=Plugin
+Plugin=FileView
+Path=[MeasureProfileList]
+Type=FileName
+Index=7
+
+[Profile08Measure]
+Measure=Plugin
+Plugin=FileView
+Path=[MeasureProfileList]
+Type=FileName
+Index=8
+
+[Profile09Measure]
+Measure=Plugin
+Plugin=FileView
+Path=[MeasureProfileList]
+Type=FileName
+Index=9
+
+[Profile10Measure]
+Measure=Plugin
+Plugin=FileView
+Path=[MeasureProfileList]
+Type=FileName
+Index=10
+
+
+
