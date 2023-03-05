@@ -28,6 +28,7 @@ Plugin=FileView
 Path=[MeasureProfileList]
 Type=FileName
 Index=2
+OnUpdateAction=[!WriteKeyValue Variables Profile02 "[Profile02Measure]" "#ROOTCONFIGPATH#Settings\Settings.inc"]
 
 [Profile03Measure]
 Measure=Plugin
@@ -35,6 +36,7 @@ Plugin=FileView
 Path=[MeasureProfileList]
 Type=FileName
 Index=3
+OnUpdateAction=[!WriteKeyValue Variables Profile03 "[Profile03Measure]" "#ROOTCONFIGPATH#Settings\Settings.inc"]
 
 [Profile04Measure]
 Measure=Plugin
@@ -42,6 +44,7 @@ Plugin=FileView
 Path=[MeasureProfileList]
 Type=FileName
 Index=4
+OnUpdateAction=[!WriteKeyValue Variables Profile04 "[Profile04Measure]" "#ROOTCONFIGPATH#Settings\Settings.inc"]
 
 [Profile05Measure]
 Measure=Plugin
@@ -49,6 +52,7 @@ Plugin=FileView
 Path=[MeasureProfileList]
 Type=FileName
 Index=5
+OnUpdateAction=[!WriteKeyValue Variables Profile05 "[Profile05Measure]" "#ROOTCONFIGPATH#Settings\Settings.inc"]
 
 [Profile06Measure]
 Measure=Plugin
@@ -56,6 +60,7 @@ Plugin=FileView
 Path=[MeasureProfileList]
 Type=FileName
 Index=6
+OnUpdateAction=[!WriteKeyValue Variables Profile06 "[Profile06Measure]" "#ROOTCONFIGPATH#Settings\Settings.inc"]
 
 [Profile07Measure]
 Measure=Plugin
@@ -63,6 +68,7 @@ Plugin=FileView
 Path=[MeasureProfileList]
 Type=FileName
 Index=7
+OnUpdateAction=[!WriteKeyValue Variables Profile07 "[Profile07Measure]" "#ROOTCONFIGPATH#Settings\Settings.inc"]
 
 [Profile08Measure]
 Measure=Plugin
@@ -70,6 +76,7 @@ Plugin=FileView
 Path=[MeasureProfileList]
 Type=FileName
 Index=8
+OnUpdateAction=[!WriteKeyValue Variables Profile08 "[Profile08Measure]" "#ROOTCONFIGPATH#Settings\Settings.inc"]
 
 [Profile09Measure]
 Measure=Plugin
@@ -77,6 +84,7 @@ Plugin=FileView
 Path=[MeasureProfileList]
 Type=FileName
 Index=9
+OnUpdateAction=[!WriteKeyValue Variables Profile09 "[Profile09Measure]" "#ROOTCONFIGPATH#Settings\Settings.inc"]
 
 [Profile10Measure]
 Measure=Plugin
@@ -84,20 +92,7 @@ Plugin=FileView
 Path=[MeasureProfileList]
 Type=FileName
 Index=10
+OnUpdateAction=[!WriteKeyValue Variables Profile10 "[Profile10Measure]" "#ROOTCONFIGPATH#Settings\Settings.inc"]
 
 
 
-[TextMeterStyle]
-Meter=String
-Measure=#*CurrentSection*#Measure
-Text=[#*CurrentSection*#Measure:%1]
-
-[Profile01]
-Meter=String
-Measure=Profile01Measure 
-OnRefreshAction=[!WriteKeyValue Variables Profile01 "%1" "#ROOTCONFIG#Settings\Settings.inc"]
-
-
-[ProfileSetMeasure]
-Measure=String
-String=Cring

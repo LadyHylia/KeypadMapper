@@ -144,7 +144,7 @@ Command2=[!Refresh]
 [MeasureNewProfile]
 Measure=Plugin
 Plugin=RunCommand
-Parameter=Xcopy "#CurrentPath#@Resources\DefaultProfile" "#CurrentPath#Settings\Profiles\#CurrentProfile#" /E
+Parameter=Xcopy "#ROOTCONFIGPATH#@Resources\DefaultProfile" "#CurrentPath#Settings\Profiles\#CurrentProfile#" /E
 FinishAction=[!Refresh]
 
 
