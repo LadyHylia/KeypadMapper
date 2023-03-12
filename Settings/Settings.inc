@@ -3,7 +3,7 @@ DynamicVariables=1
 Num=0
 NumOfKeys=BLANK
 CurrentKey=MeasureEditModeValue
-CurrentProfile=Default
+CurrentProfile=test
 EditMode=0
 FaveEditMode=0
 
@@ -27,7 +27,7 @@ CancelColor=149,0,26
 CurrentColor=255,255,255
 
 Profile01=Default
-Profile02=
+Profile02=NewProfile
 Profile03=
 Profile04=
 Profile05=

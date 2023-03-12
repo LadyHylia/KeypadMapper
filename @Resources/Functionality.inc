@@ -1,4 +1,8 @@
-    [TextStyle2]
+   [Variables]
+	BlankProfilePath=#ROOTCONFIGPATH#@Resources\DefaultProfile
+	NewProfilePath=#CurrentPath#Settings\Profiles
+
+   [TextStyle2]
 		FontSize                = (#FontSizeKey#*((#Width#)/500))
 ;		ColorScheme				= 7,234,250,255
         FontFace                =Montserrat
@@ -144,7 +148,7 @@ Command2=[!Refresh]
 [MeasureNewProfile]
 Measure=Plugin
 Plugin=RunCommand
-Parameter=Xcopy "#ROOTCONFIGPATH#@Resources\DefaultProfile" "#CurrentPath#Settings\Profiles\#CurrentProfile#" /E
+Parameter=Xcopy "$BlankProfilePath" "$NewProfilePath" /E /I /Y /Q
 FinishAction=[!Refresh]
 
 
