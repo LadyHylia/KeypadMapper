@@ -1,6 +1,6 @@
    [Variables]
 	BlankProfilePath=#ROOTCONFIGPATH#@Resources\DefaultProfile
-	NewProfilePath=#CurrentPath#Settings\Profiles
+	NewProfilePath=#ROOTCONFIGPATH#Settings\Profiles
 
    [TextStyle2]
 		FontSize                = (#FontSizeKey#*((#Width#)/500))
@@ -148,7 +148,7 @@ Command2=[!Refresh]
 [MeasureNewProfile]
 Measure=Plugin
 Plugin=RunCommand
-Parameter=Xcopy "$BlankProfilePath" "$NewProfilePath" /E /I /Y /Q
+Parameter=Xcopy "#BlankProfilePath#" "#NewProfilePath#" /E /I /Y /Q ;Currently copies files inside the folder, but not the parent folder :(
 FinishAction=[!Refresh]
 
 

@@ -3,7 +3,7 @@ DynamicVariables=1
 Num=0
 NumOfKeys=BLANK
 CurrentKey=MeasureEditModeValue
-CurrentProfile=test
+CurrentProfile=NewProfile
 EditMode=0
 FaveEditMode=0
 
