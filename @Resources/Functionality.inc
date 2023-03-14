@@ -3,7 +3,7 @@
 	NewProfilePath=#ROOTCONFIGPATH#Settings\Profiles
 	DefaultProfileName=DefaultProfile
 
-   [TextStyle2]
+	[TextStyle2]
 		FontSize                = (#FontSizeKey#*((#Width#)/500))
 ;		ColorScheme				= 7,234,250,255
         FontFace                =Montserrat
@@ -57,7 +57,7 @@ IfFalseAction=[!SetOptionGroup MeterKeys LeftMouseUpAction """[!SetVariable "INP
 DynamicVariables=1
 
 	
-	    [DynamicFontSizePlus]
+	[DynamicFontSizePlus]
         Measure         =Calc
         Paused          =1
         OnUpdateAction  =[Play "#@#Sounds\Scroll.wav"][!WriteKeyValue Variables FontSizeKey "((#FontSizeKey#)+1)"][!SetVariable FontSizeKey "((#FontSizeKey#)+1)"]
@@ -128,7 +128,7 @@ FileInitialDirectory=
 ImageInitialDirectory=
 
 
-Command1=[!WriteKeyValue Variables #CurrentKey#ImagePath "$Path$" "#CURRENTPATH#\Settings\Profiles\#CurrentProfile#\Images.inc"][!Update]
+Command1=[!WriteKeyValue Variables #Input-Var#ImagePath "$Path$" "#CURRENTPATH#\Settings\Profiles\#CurrentProfile#\Images.inc"][!Update]
 Command2=[!Refresh]
 
 [MeasureNewProfileInput]
