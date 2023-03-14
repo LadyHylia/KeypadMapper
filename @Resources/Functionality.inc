@@ -1,6 +1,7 @@
    [Variables]
-	BlankProfilePath=#ROOTCONFIGPATH#@Resources\DefaultProfile
+	BlankProfilePath=#ROOTCONFIGPATH#@Resources\DefaultProfileStorage
 	NewProfilePath=#ROOTCONFIGPATH#Settings\Profiles
+	DefaultProfileName=DefaultProfile
 
    [TextStyle2]
 		FontSize                = (#FontSizeKey#*((#Width#)/500))
@@ -148,120 +149,11 @@ Command2=[!Refresh]
 [MeasureNewProfile]
 Measure=Plugin
 Plugin=RunCommand
-Parameter=Xcopy "#BlankProfilePath#" "#NewProfilePath#" /E /I /Y /Q ;Currently copies files inside the folder, but not the parent folder :(
-FinishAction=[!Refresh]
+Parameter="Xcopy "#BlankProfilePath#" "#NewProfilePath#" /E /I /Y /Q " 
+;Currently copies files inside the folder, but not the parent folder :(
+FinishAction=[!CommandMeasure "MeasureNewProfileRename" "Run"]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-[MainMenuButton1]
-Meter=Button
-Text=Main item 1
-SubMenu=SubMenu1
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-[MeasureProfileList]
+[MeasureNewProfileRename]
 Measure=Plugin
-Plugin=FileView
-Path=#ROOTCONFIG#Settings\Profiles
-ShowDotDot=0
-ShowFile=0
-ShowFolder=1
-Count=15
-
-[Profile01Measure]
-Measure=Plugin
-Plugin=FileView
-Path=[MeasureProfileList]
-Type=FileName
-Index=1
-OnRefreshAction=[!WriteKeyValue Variables Profile01 "#CurrentSection#" "#ROOTCONFIG#Settings\Settings.inc"]
-
-
-[Profile02Measure]
-Measure=Plugin
-Plugin=FileView
-Path=[MeasureProfileList]
-Type=FileName
-Index=2
-
-[Profile03Measure]
-Measure=Plugin
-Plugin=FileView
-Path=[MeasureProfileList]
-Type=FileName
-Index=3
-
-[Profile04Measure]
-Measure=Plugin
-Plugin=FileView
-Path=[MeasureProfileList]
-Type=FileName
-Index=4
-
-[Profile05Measure]
-Measure=Plugin
-Plugin=FileView
-Path=[MeasureProfileList]
-Type=FileName
-Index=5
-
-[Profile06Measure]
-Measure=Plugin
-Plugin=FileView
-Path=[MeasureProfileList]
-Type=FileName
-Index=6
-
-[Profile07Measure]
-Measure=Plugin
-Plugin=FileView
-Path=[MeasureProfileList]
-Type=FileName
-Index=7
-
-[Profile08Measure]
-Measure=Plugin
-Plugin=FileView
-Path=[MeasureProfileList]
-Type=FileName
-Index=8
-
-[Profile09Measure]
-Measure=Plugin
-Plugin=FileView
-Path=[MeasureProfileList]
-Type=FileName
-Index=9
-
-[Profile10Measure]
-Measure=Plugin
-Plugin=FileView
-Path=[MeasureProfileList]
-Type=FileName
-Index=10
-
-
-
+Plugin=RunCommand
+Parameter=Rename "#NewProfilePath#\#DefaultProfileName#" "#CurrentProfile#"
