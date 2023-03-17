@@ -2,7 +2,11 @@
 	BlankProfilePath=#ROOTCONFIGPATH#@Resources\DefaultProfileStorage
 	NewProfilePath=#ROOTCONFIGPATH#Settings\Profiles
 	DefaultProfileName=DefaultProfile
-
+	;---AutoHotKey Variables---
+	KeyToReBind=Blank
+	NewKeyStroke=Blank
+	FileToOpen=Blank
+	SoundToPlay=Blank
 	[TextStyle2]
 		FontSize                = (#FontSizeKey#*((#Width#)/500))
 ;		ColorScheme				= 7,234,250,255
@@ -128,7 +132,7 @@ FileInitialDirectory=
 ImageInitialDirectory=
 
 
-Command1=[!WriteKeyValue Variables #Input-Var#ImagePath "$Path$" "#CURRENTPATH#\Settings\Profiles\#CurrentProfile#\Images.inc"][!Update]
+Command1=[!WriteKeyValue Variables #Input-Var#ImagePath "$Path$" "#ROOTCONFIGPATH#\Settings\Profiles\#CurrentProfile#\Images.inc"][!Update]
 Command2=[!Refresh]
 
 [MeasureNewProfileInput]
@@ -157,3 +161,8 @@ FinishAction=[!CommandMeasure "MeasureNewProfileRename" "Run"]
 Measure=Plugin
 Plugin=RunCommand
 Parameter=Rename "#NewProfilePath#\#DefaultProfileName#" "#CurrentProfile#"
+
+[MeasureAutoHotKeyFunctions]
+Measure=Plugin
+Plugin=RunCommand
+Parameter="Echo Text >Temp.ahk"
