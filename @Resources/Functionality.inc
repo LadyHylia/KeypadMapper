@@ -2,11 +2,29 @@
 	BlankProfilePath=#ROOTCONFIGPATH#@Resources\DefaultProfileStorage
 	NewProfilePath=#ROOTCONFIGPATH#Settings\Profiles
 	DefaultProfileName=DefaultProfile
-	;---AutoHotKey Variables---
-	KeyToReBind=Blank
-	NewKeyStroke=Blank
-	FileToOpen=Blank
-	SoundToPlay=Blank
+	
+	          Width       =500
+	
+			FontSizeKey =7
+            ; General - Edit here to change basic layout values of config
+                Height                  = (100/500)   *#Width#
+                ButtonSize              = (240/500)    *#Height#
+                1Y                      = ((125/500)     *#Height#)
+                2Y                      = (365/500)    *#Height# + #Gap# 
+                3Y                      = (610/500)    *#Height#  + #Gap# * 2           
+                4Y                      = (845/500)    *#Height#  + #Gap# * 3           
+                5Y                      = (1085/500)    *#Height# + #Gap# * 4
+				
+				
+                1X                      = (24/500)     *#Width#
+				2X                      = (72/500)     *#Width# + #Gap#
+				3X                      = (120/500)     *#Width# + #Gap# * 2
+				4X                      = (168/500)     *#Width# + #Gap# * 3
+                5X						= (216/500)     *#Width# + #Gap# * 4
+                Gap	                    = (58/500)    *#Height#
+				;Used for properly drawing the arrow graphics
+				ArrowDelta				= (23/500)		*#Height#
+
 	[TextStyle2]
 		FontSize                = (#FontSizeKey#*((#Width#)/500))
 ;		ColorScheme				= 7,234,250,255
@@ -132,7 +150,7 @@ FileInitialDirectory=
 ImageInitialDirectory=
 
 
-Command1=[!WriteKeyValue Variables #Input-Var#ImagePath "$Path$" "#ROOTCONFIGPATH#\Settings\Profiles\#CurrentProfile#\Images.inc"][!Update]
+Command1=[!WriteKeyValue Variables #Input-Var#ImagePath "$Path$" "#CURRENTPATH#\Settings\Profiles\#CurrentProfile#\Images.inc"][!Update]
 Command2=[!Refresh]
 
 [MeasureNewProfileInput]
@@ -161,8 +179,3 @@ FinishAction=[!CommandMeasure "MeasureNewProfileRename" "Run"]
 Measure=Plugin
 Plugin=RunCommand
 Parameter=Rename "#NewProfilePath#\#DefaultProfileName#" "#CurrentProfile#"
-
-[MeasureAutoHotKeyFunctions]
-Measure=Plugin
-Plugin=RunCommand
-Parameter="Echo Text >Temp.ahk"
