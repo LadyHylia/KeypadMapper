@@ -55,3 +55,41 @@ function Initialize()
     -- Close the file
     file:close()
 end
+
+
+function addKeyToTable(key, boolValue, targetTable)
+
+
+    if boolValue then
+        targetTable.uppercaseKeys[key] = true
+    else
+        targetTable.lowercaseKeys[key] = true
+    end
+end
+
+-- create the tables
+local SpecialKeys = {}
+local Keys = {}
+local KeyTable = { SpecialKeys = SpecialKeys, Keys = Keys }
+
+-- add a key to the table based on its case
+addKeyToTable("A", true, keyTable) -- adds "A" to the uppercaseKeys table
+addKeyToTable("a", false, keyTable) -- adds "a" to the lowercaseKeys table
+
+
+
+
+
+-- Define a table
+local myTable = {"apple", "banana", "orange"}
+
+-- Define a value to check
+local myValue = "banana"
+
+-- Loop through the table and check if the value is present
+for _, value in ipairs(myTable) do
+  if value == myValue then
+    print("Value is present in table!")
+    break
+  end
+end
