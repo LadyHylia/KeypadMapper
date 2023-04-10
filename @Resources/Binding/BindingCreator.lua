@@ -1,7 +1,4 @@
--- Variables
-    print("Hi!")
--- Define a table
-local myTable = {"", "banana", "orange"}
+--variable
 
 local keyboard = {
     ["escape"] = 1,
@@ -120,24 +117,28 @@ local keyboard = {
 }
 
 -- create the tables
-local SpecialKeys = {
-    ["escape"] = 1,
-    ["tab"] = 38,
-    ["capslock"] = 59,
-    [ "rightctrl" ] = 93,
-    [ "rightalt" ] = 88,
-    [ "function" ] = 89,
-    [ "leftwin" ] = 90,
-    [ "rightwin" ] = 91,
-}
+local hotkeyModifiers = {
+    ["Ctrl"] = "^",
+    ["Shift"] = "+",
+    ["Alt"] = "!",
+    ["Win"] = "#",
+    ["Bitwise AND"] = "&",
+    ["Tilde"] = "~",
+    ["Left Winkey"] = "<#>",
+    ["Left Ctrl"] = "<^>",
+    ["Left Alt"] = "<!>",
+    ["Left Shift"] = "<+>",
+    ["Right Shift"] = "<=>",
+    ["Right Winkey"] = "<^#>",
+    ["Right Alt"] = "<^!>",
+    ["Right Ctrl"] = "<^+>",
+  }
 
 
-local Keys = {}
-local KeyTable = { SpecialKeys = SpecialKeys, Keys = Keys }
+--local Keys = {}
+--local KeyTable = { SpecialKeys = SpecialKeys, Keys = Keys }
 
--- add a key to the table based on its case
-addKeyToTable("A", true, keyTable) -- adds "A" to the uppercaseKeys table
-addKeyToTable("a", false, keyTable) -- adds "a" to the lowercaseKeys table
+
 
 function Initialize()
 
@@ -198,32 +199,18 @@ function Initialize()
 end
 
 
-function addKeyToTable(CurrentKey, targetTable)
-
+function addKeyToTable(CurrentKey) -- checks what type of key the current working key is and places it in the proper table
 -- Loop through the table and check if the value is present
-for _, value in ipairs(myTable) do
-    if value == myValue then
-        targetTable.SpecialKeys[Currentkey] = true
-      break
-    if 
-    end
+for _, value in ipairs(hotkeyModifiers) do
+  if value == hotkeyModifiers then
+    table.insert(modkeys, value) -- add the value to the table containing modifier keys
+  else
+    table.insert(normalkeys, value) -- add the value to the table containing normal keys
+    break
   end
-
-    
+end
 end
 
 
-
-
-
-
-
-
-function DoTheThing(CurrentKey, IsSpecial, TargetTable)
-    if IsSpecial then
-        targetTable.SpecialKeys[Currentkey] = true
-    else
-        targetTable.Keys[key] = true
-    end
+function editBindingScript() --opens the profile's Bindings.ahk file and adds/modifies the current working hotkey
 end
-
