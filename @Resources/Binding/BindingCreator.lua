@@ -1,4 +1,4 @@
---variable
+--------variables-------
 
 local keyboard = {
     ["escape"] = 1,
@@ -116,8 +116,8 @@ local keyboard = {
     ["F24"] = 121
 }
 
--- create the tables
-local hotkeyModifiers = {
+-- Table of modifier keys
+ hotkeyModifiers = {
     ["Ctrl"] = "^",
     ["Shift"] = "+",
     ["Alt"] = "!",
@@ -135,68 +135,15 @@ local hotkeyModifiers = {
   }
 
 
---local Keys = {}
---local KeyTable = { SpecialKeys = SpecialKeys, Keys = Keys }
+  current_profile = SKIN:GetVariable("CurrentProfile")
+
+-- Specify the path and name of the hotkey binding file
+ output_file = SKIN:MakePathAbsolute("Settings\Profiles\#CurrentProfile#\Bindings.ahk")
 
 
+modkeys = {}
 
-function Initialize()
-
-
-    local current_profile = SKIN:GetVariable("CurrentProfile")
-    
-	-- Specify the path and name of the output file
-    local output_file = SKIN:MakePathAbsolute("Settings\Profiles\#CurrentProfile#\Bindings.ahk")
-	
-    -- Open the file for reading
-    local file = io.open(output_file, "r")
-
-    -- Read the contents of the file into a table
-    local lines = {}
-    for line in file:lines() do
-        table.insert(lines, line)
-    end
-
-    -- Modify the line you want to change
-    lines[3] = "This is the new content for line 3"
-
-    -- Close the file
-    file:close()
-
-    -- Reopen the file for writing
-    file = io.open(output_file, "w")
-
-    -- Write the modified contents back to the file
-    file:write(table.concat(lines, "\n"))
-
-    -- Close the file again
-    file:close()
-
-
-
-    
-
-    -- Open the file in write mode
-    local file = io.open(output_file, "w")
-
-    -- Write the key bindings for each variable that is "true"
-    if SKIN:GetVariable("A") == "true" then
-        file:write("a::Send {A}\n")
-    end
-
-    if SKIN:GetVariable("B") == "true" then
-        file:write("b::Send {B}\n")
-    end
-
-    if SKIN:GetVariable("C") == "true" then
-        file:write("c::Send {C}\n")
-    end
-
-    -- Repeat for the rest of the alphabet...
-
-    -- Close the file
-    file:close()
-end
+normalkeys = {}
 
 
 function addKeyToTable(CurrentKey) -- checks what type of key the current working key is and places it in the proper table
@@ -212,5 +159,45 @@ end
 end
 
 
-function editBindingScript() --opens the profile's Bindings.ahk file and adds/modifies the current working hotkey
+function editBindingScript(BindingType, BindingIndex, BindingMode) --opens the profile's Bindings.ahk file and adds/modifies the current working hotkey
+     -- Open the file for reading
+     local file = io.open(output_file, "r")
+    local LineToEdit = 
+     -- Read the contents of the file into a table
+     local lines = {}
+     for line in file:lines() do
+         table.insert(lines, line)
+     end
+ 
+     -- Modify the line you want to change
+     lines[BindingIndex] = "This is the new content for line 3"
+ 
+     -- Close the file
+     file:close()
+ 
+     -- Reopen the file for writing
+     file = io.open(output_file, "w")
+ 
+     -- Write the modified contents back to the file
+     file:write(table.concat(lines, "\n"))
+ 
+     -- Close the file again
+     file:close()
 end
+
+
+
+-- Requires: tbl is a table containing strings; str is a string.
+-- Effects : returns true if tbl contains str, false otherwise.
+local function find_string_in(tbl, str)
+    for _, element in ipairs(tbl) do
+        if (element == str) then
+            return true
+        end
+    end
+    return false
+end
+
+local t = {"hello", "there", "friend"}
+print(find_string_in(t, "friend"))
+print(find_string_in(t, "goodbye"))
