@@ -1,4 +1,4 @@
---------variables-------
+-- Variables-------
 
 local keyboard = {
     ["escape"] = 1,
@@ -145,6 +145,9 @@ modkeys = {}
 
 normalkeys = {}
 
+output = {}
+
+--AHK code string snippets
 
 function addKeyToTable(CurrentKey) -- checks what type of key the current working key is and places it in the proper table
 -- Loop through the table and check if the value is present
@@ -162,6 +165,14 @@ end
 function editBindingScript(BindingType, BindingIndex, BindingMode) --opens the profile's Bindings.ahk file and adds/modifies the current working hotkey
      -- Open the file for reading
      local file = io.open(output_file, "r")
+     local function find_string_in(file, BindingIndex)
+        for _, element in ipairs(file) do
+            if (element == BindingIndex) then
+                return true
+            end
+        end
+        return false
+    end
     local LineToEdit = 
      -- Read the contents of the file into a table
      local lines = {}
@@ -189,14 +200,7 @@ end
 
 -- Requires: tbl is a table containing strings; str is a string.
 -- Effects : returns true if tbl contains str, false otherwise.
-local function find_string_in(tbl, str)
-    for _, element in ipairs(tbl) do
-        if (element == str) then
-            return true
-        end
-    end
-    return false
-end
+
 
 local t = {"hello", "there", "friend"}
 print(find_string_in(t, "friend"))
