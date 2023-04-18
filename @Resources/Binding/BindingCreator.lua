@@ -1,5 +1,5 @@
 -- Variables-------
-
+-- Table of keys on the keyboard and their associated AHK values, minus modifier keys
 local keyboard = {
     ["escape"] = 1,
     ["f1"] = 2,
@@ -140,11 +140,13 @@ local keyboard = {
 -- Specify the path and name of the hotkey binding file
  output_file = SKIN:MakePathAbsolute("Settings\Profiles\#CurrentProfile#\Bindings.ahk")
 
-
+-- Specify modifier keys to be used in the hotkey
 modkeys = {}
 
+-- Specify regular keys to be used in the hotkey
 normalkeys = {}
 
+-- Combination of keys to listen for or send, depending on the value of BindingMode
 output = {}
 
 --AHK code string snippets
@@ -181,7 +183,7 @@ function editBindingScript(BindingType, BindingIndex, BindingMode) --opens the p
      end
  
      -- Modify the line you want to change
-     lines[BindingIndex] = "This is the new content for line 3"
+     lines[BindingIndex] = output
  
      -- Close the file
      file:close()
