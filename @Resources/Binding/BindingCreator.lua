@@ -1,4 +1,6 @@
--- Variables-------
+-- Variables:
+
+
 -- Table of keys on the keyboard and their associated AHK values, minus modifier keys
 local keyboard = {
     ["escape"] = 1,
@@ -117,7 +119,7 @@ local keyboard = {
 }
 
 -- Table of modifier keys
- hotkeyModifiers = {
+ local hotkeyModifiers = {
     ["Ctrl"] = "^",
     ["Shift"] = "+",
     ["Alt"] = "!",
@@ -134,56 +136,57 @@ local keyboard = {
     ["Right Ctrl"] = "<^+>",
   }
 
-
-  current_profile = SKIN:GetVariable("CurrentProfile")
+-- Value of the current profile the skin is set to
+  local current_profile = SKIN:GetVariable("CurrentProfile")
 
 -- Specify the path and name of the hotkey binding file
- output_file = SKIN:MakePathAbsolute("Settings\Profiles\#CurrentProfile#\Bindings.ahk")
+ local output_file = SKIN:MakePathAbsolute('Settings\\Profiles\\#CurrentProfile#\\Bindings.ahk')
 
 -- Specify modifier keys to be used in the hotkey
-modkeys = {}
+local modkeys = {}
 
 -- Specify regular keys to be used in the hotkey
-normalkeys = {}
+local normalkeys = {}
 
 -- Combination of keys to listen for or send, depending on the value of BindingMode
-output = {}
+local output = modkeys.. "" ..normalkeys
 
 --AHK code string snippets
 
-function addKeyToTable(CurrentKey) -- checks what type of key the current working key is and places it in the proper table
+
+
+
+
+
+local function addKeyToTable(CurrentKey) -- checks what type of key the current working key is and places it in the proper table
 -- Loop through the table and check if the value is present
 for _, value in ipairs(hotkeyModifiers) do
   if value == hotkeyModifiers then
     table.insert(modkeys, value) -- add the value to the table containing modifier keys
+    print ("key is a modifier")
   else
     table.insert(normalkeys, value) -- add the value to the table containing normal keys
+    print("Key is normal")
     break
   end
 end
 end
 
 
-function editBindingScript(BindingType, BindingIndex, BindingMode) --opens the profile's Bindings.ahk file and adds/modifies the current working hotkey
+local function editBindingScript(BindingType, BindingIndex, BindingMode) --opens the profile's Bindings.ahk file and adds/modifies the current working hotkey
      -- Open the file for reading
      local file = io.open(output_file, "r")
-     local function find_string_in(file, BindingIndex)
-        for _, element in ipairs(file) do
-            if (element == BindingIndex) then
-                return true
-            end
-        end
-        return false
-    end
-    local LineToEdit = 
-     -- Read the contents of the file into a table
-     local lines = {}
-     for line in file:lines() do
-         table.insert(lines, line)
+
+     local ahkFile = {}
+
+     local LineToEdit = (BindingIndex + 1)
+
+     for Line in file:ahkFile() do
+         table.insert(ahkFile, line)
      end
  
      -- Modify the line you want to change
-     lines[BindingIndex] = output
+     ahkFile[BindingIndex] = output
  
      -- Close the file
      file:close()
@@ -192,13 +195,20 @@ function editBindingScript(BindingType, BindingIndex, BindingMode) --opens the p
      file = io.open(output_file, "w")
  
      -- Write the modified contents back to the file
-     file:write(table.concat(lines, "\n"))
+     file:write(table.concat(ahkFile, "\n"))
  
      -- Close the file again
      file:close()
 end
 
-
+local function find_string_in(file, BindingIndex)
+  for _, element in ipairs(file) do
+      if (element == BindingIndex) then
+          return true
+      end
+  end
+  return false
+end
 
 -- Requires: tbl is a table containing strings; str is a string.
 -- Effects : returns true if tbl contains str, false otherwise.
