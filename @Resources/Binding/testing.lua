@@ -181,20 +181,33 @@ local function addKeyToTable(CurrentKey)
   end
 end
 
-local function writeToFile(mode, profile)
-       -- Open the file for reading
-       local file = io.open(output_file, "r")
-
-       local ahkFile = {}
+local function writeToFile(mode, profile, bindingindex)
+       --Define the path to the current profile's ahk file
+       local output_file=SKIN:MakePathAbsolute("Settings/Profiles/") .. profile .. "Bindings.ahk"
+      --
+       --local output_file=output_file_path .. profile .. "Bindings.ahk"
+      --opens the ahk file
+       local ahkFile = io.open(output_file)
+      --dumps the ahk file to a table
+      local ahkContents = ahkFile:read('*all')
   
-       local LineToEdit = (BindingIndex + 1)
+       --local LineToEdit = (bindingindex + 1)
   
-       for Line in file:ahkFile() do
-           table.insert(ahkFile, line)
+       for Line in ahkContents:gmatch() do 
+          if ahkContents:seek(bindingindex, 1) == true then --finds the index for the key being edited. If none exists, it is appended
+            if mode == true then --if we are determining the input or output for the hotkey. True=input, False=output
+              local lineToEdit = bindingindex + 1
+              local keystroke = modkeys .. "::" .. normalkeys
+            else
+              local lineToEdit = bindingindex + 2
+              local keystroke = "Send," .. modkeys "::" .. normalkeys
+            end
+          end
+           table.insert(modkeys .. "::" .. normalkeys)
        end
    
        -- Modify the line you want to change
-       ahkFile[BindingIndex] = output
+       ahkFile[bindingindex] = keystroke
    
        -- Close the file
        file:close()
@@ -216,6 +229,8 @@ local function writeToFile(mode, profile)
 end
 --addKeyToTable("#")
 --addKeyToTable("A")
+
+
 
 print(modkeys[1])
 print(normalkeys[1])
