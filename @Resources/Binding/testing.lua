@@ -234,3 +234,64 @@ end
 
 print(modkeys[1])
 print(normalkeys[1])
+
+
+
+
+
+
+
+
+
+--ai lua code generator output
+
+function replaceLineAfterPhrase(phrase, replacement, filename)
+  -- Open the file in read mode
+  local file = io.open(filename, "r")
+  if not file then
+      -- Log the error if file cannot be opened
+      print("Error: Unable to open file")
+      return
+  end
+  
+  -- Read the file line by line
+  local lines = {}
+  local found = false
+  for line in file:lines() do
+      if found then
+          -- Replace the line after the phrase
+          lines[#lines + 1] = replacement
+          found = false
+      else
+          -- Check if the phrase appears in the line
+          if line:find(phrase) then
+              found = true
+          end
+          lines[#lines + 1] = line
+      end
+  end
+  
+  -- Close the file
+  file:close()
+  
+  -- If the phrase was not found, append the replacement to the end of the file
+  if not found then
+      lines[#lines + 1] = replacement
+  end
+  
+  -- Open the file in write mode
+  file = io.open(filename, "w")
+  if not file then
+      -- Log the error if file cannot be opened
+      print("Error: Unable to open file")
+      return
+  end
+  
+  -- Write the modified lines to the file
+  for _, line in ipairs(lines) do
+      file:write(line .. "\n")
+  end
+  
+  -- Close the file
+  file:close()
+end
