@@ -245,7 +245,22 @@ print(normalkeys[1])
 
 --ai lua code generator output
 
-function replaceLineAfterPhrase(phrase, replacement, filename)
+--filename = bindings.ahk
+--
+--this supposedly returns the directory containing the script
+--just need to create a function to edit this data to remove the last few directories and point it to the current profile
+local function script_path()
+  local str = debug.getinfo(2, "S").source:sub(2)
+  return str:match("(.*[/\\])")
+end
+local ahk_path = (script_path)
+
+local function ahk_full_path()
+  
+end
+
+
+function ReplaceLineAfterPhrase(phrase, replacement, filename)
   -- Open the file in read mode
   local file = io.open(filename, "r")
   if not file then
@@ -257,6 +272,7 @@ function replaceLineAfterPhrase(phrase, replacement, filename)
   -- Read the file line by line
   local lines = {}
   local found = false
+  local filename = 
   for line in file:lines() do
       if found then
           -- Replace the line after the phrase
