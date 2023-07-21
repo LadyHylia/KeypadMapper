@@ -249,43 +249,38 @@ print(normalkeys[1])
 --
 --this supposedly returns the directory containing the script
 --just need to create a function to edit this data to remove the last few directories and point it to the current profile
-local function script_path()
-  local str = debug.getinfo(2, "S").source:sub(2)
-  return str:match("(.*[/\\])")
-end
-local ahk_path = (script_path)
+--local function script_path()
+  --local str = debug.getinfo(2, "S").source:sub(2)
+  --return str:match("(.*[/\\])")
+--end
+local ahk_path = ("test")
+--local ahk_path = SKIN:GetVariable('BindingPath', 'n/a')
 
-local function ahk_full_path()
-  
-end
+local ahk_full_path = (ahk_path .. "ing")
 
-
-function ReplaceLineAfterPhrase(phrase, replacement, filename)
+local function ReplaceLineAfterPhrase(phrase, replacement, filename)
   -- Open the file in read mode
-  local file = io.open(filename, "r")
-  if not file then
-      -- Log the error if file cannot be opened
-      print("Error: Unable to open file")
-      return
-  end
+  local ahkfile = io.open(filename, "r")
+
   
   -- Read the file line by line
   local lines = {}
   local found = false
-  local filename = 
-  for line in file:lines() do
+  local filename = "Bindings.ahk"
+ for Line in file:lines(a) do
       if found then
           -- Replace the line after the phrase
-          lines[#lines + 1] = replacement
+          lines[#lines + 1] = (modkeys .. normalkeys)
           found = false
       else
           -- Check if the phrase appears in the line
           if line:find(phrase) then
               found = true
-          end
-          lines[#lines + 1] = line
       end
+          --lines[#lines + 1] = line
+      
   end
+end
   
   -- Close the file
   file:close()
@@ -311,3 +306,5 @@ function ReplaceLineAfterPhrase(phrase, replacement, filename)
   -- Close the file
   file:close()
 end
+
+print(ahk_full_path)
