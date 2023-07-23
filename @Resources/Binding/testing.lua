@@ -258,7 +258,7 @@ local ahk_path = ("test")
 
 local ahk_full_path = (ahk_path .. "ing")
 
-local function ReplaceLineAfterPhrase(phrase, replacement, filename)
+local function ReplaceLineAfterPhrase(phrase, replacement, filename, io)
   -- Open the file in read mode
   local ahkfile = io.open(filename, "r")
 
@@ -267,15 +267,25 @@ local function ReplaceLineAfterPhrase(phrase, replacement, filename)
   local lines = {}
   local found = false
   local filename = "Bindings.ahk"
- for Line in file:lines(a) do
+
+  --true = input, false = output
+  local io = true
+
+ for Line in file:lines() do
       if found then
+        if io then
           -- Replace the line after the phrase
           lines[#lines + 1] = (modkeys .. normalkeys)
           found = false
+        else
+        end
       else
           -- Check if the phrase appears in the line
           if line:find(phrase) then
+            if io then
               found = true
+            else
+            end
       end
           --lines[#lines + 1] = line
       
