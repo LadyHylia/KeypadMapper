@@ -272,22 +272,29 @@ local function ReplaceLineAfterPhrase(phrase, replacement, filename, io)
   local io = true
 
  for Line in file:lines() do
-      if found then
+      if found then --why are we checking this here and after this if statement?
         if io then
           -- Replace the line after the phrase
           lines[#lines + 1] = (modkeys .. normalkeys)
           found = false
         else
+          lines[#lines + 3] = (modkeys .. normalkeys)
+          found = false
         end
       else
           -- Check if the phrase appears in the line
-          if line:find(phrase) then
+
+          
+          if lines:find(phrase) then
             if io then
+              lines[#lines + 1] = (modkeys .. normalkeys)
               found = true
             else
+              lines[#lines + 1] = (modkeys .. normalkeys)
+              found = false
             end
       end
-          --lines[#lines + 1] = line
+          
       
   end
 end
@@ -296,7 +303,7 @@ end
   file:close()
   
   -- If the phrase was not found, append the replacement to the end of the file
-  if not found then
+  if not found then --???????
       lines[#lines + 1] = replacement
   end
   
