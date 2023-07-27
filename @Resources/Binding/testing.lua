@@ -269,30 +269,40 @@ local function ReplaceLineAfterPhrase(phrase, replacement, filename, io)
   local filename = "Bindings.ahk"
 
   --true = input, false = output
+  --we assume to be editing input unless specified
   local io = true
 
  for Line in file:lines() do
       if found then --why are we checking this here and after this if statement?
-        if io then
+        if io then --if type=input
           -- Replace the line after the phrase
           lines[#lines + 1] = (modkeys .. normalkeys)
-          found = false
+        --  found = false
         else
           lines[#lines + 3] = (modkeys .. normalkeys)
-          found = false
+        --  found = false
         end
       else
           -- Check if the phrase appears in the line
 
           
-          if lines:find(phrase) then
+          if lines:find(phrase) then --okay here is where the found variable actually gets set
             if io then
-              lines[#lines + 1] = (modkeys .. normalkeys)
+            lines[#lines + 1] = (modkeys .. normalkeys)
               found = true
             else
-              lines[#lines + 1] = (modkeys .. normalkeys)
-              found = false
+            lines[#lines + 3] = (modkeys .. normalkeys)
+              found = true
             end
+          else
+            if io then
+              lines[#lines + 1] = (modkeys .. normalkeys)
+                found = false
+              else
+              lines[#lines + 3] = (modkeys .. normalkeys)
+                found = false
+              end
+
       end
           
       
