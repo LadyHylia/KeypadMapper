@@ -265,7 +265,11 @@ local function ReplaceLineAfterPhrase(phrase, replacement, filename, io)
   
   -- Read the file line by line
   local lines = {}
-  local found = false
+  local line1 = #lines + 1
+  local line2 = "{"
+  local index = phrase
+  local ahkFunction = {[1] = index, [2] = "input" }
+  local found = FindMatchingString(index)
   local filename = "Bindings.ahk"
 
   --true = input, false = output
@@ -273,7 +277,7 @@ local function ReplaceLineAfterPhrase(phrase, replacement, filename, io)
   local io = true
 
  for Line in file:lines() do
-      if found then --why are we checking this here and after this if statement?
+      if found then
         if io then --if type=input
           -- Replace the line after the phrase
           lines[#lines + 1] = (modkeys .. normalkeys)
@@ -286,34 +290,22 @@ local function ReplaceLineAfterPhrase(phrase, replacement, filename, io)
           -- Check if the phrase appears in the line
 
           
-          if lines:find(phrase) then --okay here is where the found variable actually gets set
-            if io then
-            lines[#lines + 1] = (modkeys .. normalkeys)
-              found = true
-            else
-            lines[#lines + 3] = (modkeys .. normalkeys)
-              found = true
-            end
-          else
-            if io then
-              lines[#lines + 1] = (modkeys .. normalkeys)
-                found = false
-              else
-              lines[#lines + 3] = (modkeys .. normalkeys)
-                found = false
-              end
-
-      end
-          
       
   end
 end
   
+function FindMatchingString(string)
+  if lines:find(phrase) then --okay here is where the found variable actually gets set
+    return true      
+  else
+    return false
+    end
+  end
   -- Close the file
   file:close()
   
   -- If the phrase was not found, append the replacement to the end of the file
-  if not found then --???????
+  if not found then 
       lines[#lines + 1] = replacement
   end
   
