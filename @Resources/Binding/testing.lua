@@ -258,44 +258,49 @@ local ahk_path = ("test")
 
 local ahk_full_path = (ahk_path .. "ing")
 
-local function ReplaceLineAfterPhrase(phrase, replacement, filename, io)
+local function ReplaceLineAfterPhrase(index, replacement, io, input, output)
   -- Open the file in read mode
-  local ahkfile = io.open(filename, "r")
+  
 
   
-  -- Read the file line by line
-  local lines = {}
-  local line1 = #lines + 1
-  local line2 = "{"
-  local index = phrase
-  local ahkFunction = {[1] = index, [2] = "input" }
-  local found = FindMatchingString(index)
+  -- dump the file to an array
   local filename = "Bindings.ahk"
+  local ahkfile = io.open(filename, "r")
 
-  --true = input, false = output
-  --we assume to be editing input unless specified
-  local io = true
+  --constructing the ahk code
+  local lines = {}
+  local line1 = #index
+  local line2 = input
+  local line3 = "{"
+  local line4 = output
+  local line5 = "}"
+  
+  local input = replacement
+  local ahkFunction = {[1] = index, [2] = input }
+  local found = FindMatchingString(index)
 
  for Line in file:lines() do
       if found then
         if io then --if type=input
           -- Replace the line after the phrase
-          lines[#lines + 1] = (modkeys .. normalkeys)
+          lines[#index + 1] = (modkeys .. normalkeys) 
+          --lines[#lines + 1] is appending the file
+          --should be lines[index line]
         --  found = false
         else
-          lines[#lines + 3] = (modkeys .. normalkeys)
+          lines[#index + 3] = (modkeys .. normalkeys)
         --  found = false
         end
       else
           -- Check if the phrase appears in the line
-
+          lines[#lines + 1] = (modkeys .. normalkeys)
           
       
   end
 end
   
 function FindMatchingString(string)
-  if lines:find(phrase) then --okay here is where the found variable actually gets set
+  if lines:find(string) then --okay here is where the found variable actually gets set
     return true      
   else
     return false
