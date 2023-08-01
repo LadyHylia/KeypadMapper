@@ -239,30 +239,12 @@ print(normalkeys[1])
 
 
 
-
-
-
-
---ai lua code generator output
-
---filename = bindings.ahk
---
---this supposedly returns the directory containing the script
---just need to create a function to edit this data to remove the last few directories and point it to the current profile
---local function script_path()
-  --local str = debug.getinfo(2, "S").source:sub(2)
-  --return str:match("(.*[/\\])")
---end
 local ahk_path = ("test")
 --local ahk_path = SKIN:GetVariable('BindingPath', 'n/a')
 
 local ahk_full_path = (ahk_path .. "ing")
 
-local function ReplaceLineAfterPhrase(index, replacement, io, input, output)
-  -- Open the file in read mode
-  
-
-  
+local function constructahkScript(index, replacement, io, input, output)
   -- dump the file to an array
   local filename = "Bindings.ahk"
   local ahkfile = io.open(filename, "r")
@@ -276,30 +258,51 @@ local function ReplaceLineAfterPhrase(index, replacement, io, input, output)
   local line5 = "}"
   
   local input = replacement
-  local ahkFunction = {[1] = index, [2] = input }
+  local ahkFunction = {[1] = index, [2] = input, [3] = "{", [4] = output, [5] = "}"}
   local found = FindMatchingString(index)
+
+--the double colons needed to signify the transition from input to output has stumped me
+--but I think I have it figured out
+--only add it if found = false, meaning the index is not already in the file
+--if its already inside the file, then the double colons are there and need to be preserved
+--unless we are editing the input, in which case the whole string can be thrown out and reconstructed
 
  for Line in file:lines() do
       if found then
         if io then --if type=input
           -- Replace the line after the phrase
-          lines[#index + 1] = (modkeys .. normalkeys) 
-          --lines[#lines + 1] is appending the file
-          --should be lines[index line]
-        --  found = false
+          lines[#index + 1] = (modkeys .. normalkeys .. "::")
         else
           lines[#index + 3] = (modkeys .. normalkeys)
-        --  found = false
         end
       else
+        if io then
           -- Check if the phrase appears in the line
-          lines[#lines + 1] = (modkeys .. normalkeys)
-          
+          lines[#lines + 1] = (modkeys .. normalkeys .. "::")
+        else
+          lines[#lines + 3] = (modkeys .. normalkeys)
+        end
+      end
+
+
+      file = io.open(filename, "w")
+      if not file then
+          -- Log the error if file cannot be opened
+          print("Error: Unable to open file")
+          return
+      end
       
-  end
+      -- Write the modified lines to the file
+      for _, line in ipairs(lines) do
+          file:write(line .. "\n")
+      end
+      
+      -- Close the file
+      file:close()
+    end
 end
   
-function FindMatchingString(string)
+function FindMatchingString(lines, string)
   if lines:find(string) then --okay here is where the found variable actually gets set
     return true      
   else
@@ -310,25 +313,8 @@ function FindMatchingString(string)
   file:close()
   
   -- If the phrase was not found, append the replacement to the end of the file
-  if not found then 
-      lines[#lines + 1] = replacement
-  end
   
   -- Open the file in write mode
-  file = io.open(filename, "w")
-  if not file then
-      -- Log the error if file cannot be opened
-      print("Error: Unable to open file")
-      return
-  end
-  
-  -- Write the modified lines to the file
-  for _, line in ipairs(lines) do
-      file:write(line .. "\n")
-  end
-  
-  -- Close the file
-  file:close()
-end
+
 
 print(ahk_full_path)
