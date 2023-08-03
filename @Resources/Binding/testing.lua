@@ -285,7 +285,7 @@ local function constructahkScript(index, replacement, io, input, output)
       end
 
 
-      file = io.open(filename, "w")
+      ahkfile = io.open(filename, "w")
       if not file then
           -- Log the error if file cannot be opened
           print("Error: Unable to open file")
@@ -294,7 +294,7 @@ local function constructahkScript(index, replacement, io, input, output)
       
       -- Write the modified lines to the file
       for _, line in ipairs(lines) do
-          file:write(line .. "\n")
+          ahkfile:write(lines .. "\n")
       end
       
       -- Close the file
