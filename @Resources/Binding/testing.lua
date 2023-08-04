@@ -235,8 +235,26 @@ end
 print(modkeys[1])
 print(normalkeys[1])
 
+--copied from stackoverflow
+--reads file into an array
+--since you can only get one line at a time, it must loop until the end of the file is reached.
 
 
+
+---You can pass "*a" to read function, it should read the whole file:
+
+ -- local file = io.open("file-name", "r");
+ -- local data = file:read("*a")
+  
+ -- And if you want to store each line in an array. Like Jane's solution you can use io:lines () - which returns iterator function (each call gives you a new line)
+  
+  ---- local file = io.open("file-name", "r");
+  -- local arr = {}
+   --for line in file:lines() do
+   --   table.insert (arr, line);
+  -- end
+  
+  
 
 
 local ahk_path = ("test")
@@ -247,7 +265,14 @@ local ahk_full_path = (ahk_path .. "ing")
 local function constructahkScript(index, replacement, io, input, output)
   -- dump the file to an array
   local filename = "Bindings.ahk"
-  local ahkfile = io.open(filename, "r")
+--  local ahkfile = io.open(filename, "r")
+
+  local ahkfile = io.open("filename", "r");
+  local fileArray = {}
+  for line in ahkfile:lines() do
+    table.insert (fileArray, line);
+  end
+
 
   --constructing the ahk code
   local lines = {}
@@ -285,7 +310,7 @@ local function constructahkScript(index, replacement, io, input, output)
       end
 
 
-      file = io.open(filename, "w")
+      ahkfile = io.open(filename, "w")
       if not file then
           -- Log the error if file cannot be opened
           print("Error: Unable to open file")
