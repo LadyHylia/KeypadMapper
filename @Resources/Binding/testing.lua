@@ -319,7 +319,7 @@ local function constructahkScript(index, replacement, io, input, output)
       
       -- Write the modified lines to the file
       for _, line in ipairs(lines) do
-          file:write(line .. "\n")
+          ahkfile:write(lines .. "\n")
       end
       
       -- Close the file
